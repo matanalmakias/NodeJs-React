@@ -1,6 +1,10 @@
 import logo from "./logo.svg";
 import { useEffect } from "react";
 import "./App.css";
+import NavBar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
+import Router from "./components/Router/Router";
 
 function App() {
   const url = `http://localhost:3001/api/auth/signin`;
@@ -20,7 +24,14 @@ function App() {
       })
       .catch((e) => console.log(e));
   }, []);
-  return <></>;
+  return (
+    <>
+      <Header />
+      <Footer />
+
+      <Router />
+    </>
+  );
 }
 
 export default App;

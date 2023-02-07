@@ -33,7 +33,7 @@ router.post("/signup", validateSignUp, userAlreadyExists, async (req, res) => {
 router.post("/signin", validateSignIn, async (req, res) => {
   //email and password:
   try {
-    const user = await User.findOne({ email: req.body.email }).populate(
+    const user = await User.findOne({ username: req.body.username }).populate(
       "roles"
     );
 
@@ -61,15 +61,13 @@ router.post("/signin", validateSignIn, async (req, res) => {
       authorities.push(`ROLE_` + user.roles[i].name.toUpperCase());
     }
 
-    return res
-      .status(200)
-      .json({
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        roles: authorities,
-        accessToken: token,
-      });
+    return res.status(200).json({
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      roles: authorities,
+      accessToken: token,
+    });
   } catch (e) {
     return res.status(500).json({ message: "Sign in error", error: e });
   }
